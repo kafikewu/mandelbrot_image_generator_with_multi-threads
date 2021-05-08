@@ -1,0 +1,1 @@
+gcc -Wall -g -c mandel.c -o mandel.o && gcc mandel.o bitmap.o -o mandel -lpthread -lm && gcc -Wall -g -c bitmap.c -o bitmap.o && ./mandel -x -0.722 -y 0.246 -s 0.019 

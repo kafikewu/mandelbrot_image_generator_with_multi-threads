@@ -1,0 +1,45 @@
+#include <getopt.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <errno.h>
+#include <string.h>
+#include <pthread.h>
+#include <semaphore.h>
+int main () 
+{
+    //float SCALEX = ; 
+    ///X = -1.5
+    for(int i=1; i<100; i++)
+    {
+        char command[100] = "./mandel ";
+        char name_of_file[20] = " -o mandel";
+        char some[5];
+        sprintf(some, "%d", i);
+        strcat(name_of_file, some);
+        strcat(name_of_file,".bmp");
+        float scale = 4 / (float)i;
+        char X[20] = " -x ";
+        char x_size[10];
+        
+        sprintf(x_size, "%f", -1.4);
+        strcat(X, x_size);
+        char Y[20] = " -y ";
+        char y_size[10];
+        sprintf(y_size, "%f", 0.0);
+        strcat(Y, y_size);
+        char scale_char[10];
+        char scale_of_file[20] = " -s ";
+        sprintf(scale_char, "%f", scale);
+        
+        strcat(scale_of_file, scale_char);
+        strcat(command, X);
+        strcat(command, Y);
+        strcat(command, scale_of_file);
+        strcat(command, name_of_file);
+        system(command);
+        //cout<<command<<endl;
+    }
+    system("ffmpeg -f image2 -r 10 -i mandel%01d.png -c:v libx264 -pix_fmt yuv420p out.mp4");
+    return 0; 
+} 
